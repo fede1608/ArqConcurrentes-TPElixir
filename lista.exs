@@ -6,7 +6,7 @@ defmodule Lista do
     Map.put(map,:alumnos,[])
     Map.put(map,:profesores,[])
     Map.put(map,:mensajes,[])
-    spawn_link(fn -> loop(%{}) end)
+    spawn_link(fn -> loop(map) end)
   end
 
   def loop(map) do
@@ -16,7 +16,7 @@ defmodule Lista do
     receive do
       {pid, :alumnoSeConecta} ->
       IO.puts 'Un alumno se conecto'
-      Map.put(map,:alumnos,alumnos ++ [pid])
+      Map.put(map,:alumnos,[] ++ [pid])
       {pid, :profesorSeConecta} ->
       IO.puts 'Un profesor se conecto'
       Map.put(map,:profesores,profesores ++ [pid])
