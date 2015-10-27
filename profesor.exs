@@ -1,4 +1,5 @@
 defmodule Profesor do
+  IO.puts "Profesor: loaded."
   def start do
     spawn_link(fn -> loop end)
   end

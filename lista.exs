@@ -1,5 +1,6 @@
 defmodule Lista do
 
+  IO.puts "Lista: loaded."
   def start do
     spawn_link(fn -> loop end)
   end
