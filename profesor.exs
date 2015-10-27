@@ -9,9 +9,9 @@ defmodule Profesor do
     receive do
       {lista,:nuevaConsulta ,consulta} -> 
         IO.puts "Hay una nueva consulta" <> consulta
-        send lista,{self,:nuevaRespuesta}
-      {lista, :profesorResponde} -> IO.puts 'Un profesor responde'
-      {lista, _ } -> send :pid, {:error, 'Accion Invalida de #{inspect pid}'}
+        send lista,{self,consulta,"respuesta",:profesorResponde}
+      {lista, :nuevaRespuesta} -> IO.puts 'Un profesor responde'
+      {lista, _ } -> IO.puts 'Mensaje invalido'
     end
   end
 
