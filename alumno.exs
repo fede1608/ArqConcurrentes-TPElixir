@@ -1,8 +1,7 @@
 defmodule Alumno do
   IO.puts "Alumno: loaded."
   def start(list) do
-    lista = list
-    conectarseALaLista
+    conectarseALaLista list
     spawn_link(fn -> loop end)
   end
 
@@ -11,9 +10,10 @@ defmodule Alumno do
       {pid, consulta, respuesta, :nuevaRespuesta} -> IO.puts "Hay una nueva respuesta: " <> respuesta <> " a: " <> consulta
       {pid, mensaje, :nuevoMensaje} -> IO.puts "Un alumno mando: " <> mensaje
     end
+    loop
   end
 
-  def conectarseALaLista do
-    send lista, {self, :alumnoSeConecta}
+  def conectarseALaLista list do
+    send list, {self, :alumnoSeConecta}
   end
 end
