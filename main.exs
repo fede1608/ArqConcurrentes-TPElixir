@@ -8,10 +8,10 @@ defmodule Main do
   lista = Lista.start
   IO.puts "Lista: " <> inspect(lista)
 #levanta alumno
-  alumno = Alumno.start
+  alumno = Alumno.start(lista)
   IO.puts "Alumno: " <> inspect(alumno)
 #levanta profesor
-  profesor = Profesor.start
+  profesor = Profesor.start(lista)
   IO.puts "Profesor: " <> inspect(profesor)
 #conecta alumno con lista
 #conecta profesor con lista
