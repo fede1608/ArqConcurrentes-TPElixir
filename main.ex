@@ -1,4 +1,5 @@
 defmodule Main do
+  IO.puts "------ Main running -------"
 #levanta lista
 #levanta alumno
 #levanta profesor
