@@ -17,6 +17,7 @@ defmodule Profesor do
         :timer.sleep(200)
         send lista,{self,consulta,"respuesta",:profesorResponde}
       {lista, mensaje,respuesta,:nuevaRespuesta} -> IO.puts 'Un profesor responde'
+      {lista, mensaje,:profesorEmpiezaEscribir} -> IO.puts "Otro profesor empezo a escribir para" <> mensaje
       {lista, _ } -> IO.puts 'Mensaje invalido'
     end
     loop
