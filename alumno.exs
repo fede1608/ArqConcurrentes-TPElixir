@@ -12,7 +12,7 @@ defmodule Alumno do
   def loop do
     receive do
       {pid, consulta, respuesta, :nuevaRespuesta} -> IO.puts "Hay una nueva respuesta: " <> respuesta <> " a: " <> consulta
-      {pid, mensaje, :nuevoMensaje} -> IO.puts "Un alumno mando: " <> mensaje
+      {pid, mensaje, :nuevaConsulta} -> IO.puts "Un alumno mando: " <> mensaje
     end
     loop
   end
