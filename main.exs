@@ -17,7 +17,6 @@ defmodule Main do
 #levanta profesor
   profesor = Profesor.start(lista)
   IO.puts "Profesor: " <> inspect(profesor)
-
-  send lista, {alumno1, "hello world", :nuevoMensaje}
+  :timer.sleep(10000000)
   
 end
