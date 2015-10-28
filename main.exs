@@ -19,4 +19,5 @@ defmodule Main do
   IO.puts "Profesor: " <> inspect(profesor)
 
   send lista, {alumno1, "hello world", :nuevoMensaje}
+  
 end
