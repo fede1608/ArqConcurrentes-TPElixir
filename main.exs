@@ -7,12 +7,16 @@ defmodule Main do
 #levanta lista
   lista = Lista.start
   IO.puts "Lista: " <> inspect(lista)
-#levanta alumno
-  alumno = Alumno.start(lista)
-  IO.puts "Alumno: " <> inspect(alumno)
+#levanta alumnos
+  alumno1 = Alumno.start(lista)
+  IO.puts "Alumno: " <> inspect(alumno1)
+  alumno2 = Alumno.start(lista)
+  IO.puts "Alumno: " <> inspect(alumno2)
+  alumno3 = Alumno.start(lista)
+  IO.puts "Alumno: " <> inspect(alumno3)
 #levanta profesor
   profesor = Profesor.start(lista)
   IO.puts "Profesor: " <> inspect(profesor)
-#conecta alumno con lista
-#conecta profesor con lista
+
+  send lista, {alumno1, "hello world", :nuevoMensaje}
 end
