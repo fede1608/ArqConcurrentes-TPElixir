@@ -24,6 +24,9 @@ defmodule Lista do
         IO.puts "Un alumno mando: " <> mensaje
         sendNuevoMensaje(alumnos,mensaje)
         sendNuevoMensaje(profesores,mensaje)
+      {pid, consulta, :profesorEmpiezaEscribir} ->
+          IO.puts "Un prof empezo a escribir una respuesta a: " <> consulta
+          sendEmpezoEscribir(profesores,pid,consulta)
       {pid, mensaje, respuesta, :profesorResponde} ->
         IO.puts "Un profesor respondio: " <> respuesta
         sendNuevaRespuesta(alumnos,mensaje,respuesta)
@@ -50,6 +53,16 @@ defmodule Lista do
 
   def sendNuevaRespuesta([],mensaje,respuesta) do
     IO.puts "Se termino de enviar respuesta " <> respuesta <> " al mensaje " <> mensaje
+  end
+
+  def sendEmpezoEscribir([head|tail],pid,mensaje) do
+    IO.puts "Se envio notificacion de empezar a escribir respuesta a  " <> mensaje <> " a " <> inspect(head)
+    send head,{self,mensaje,:profesorEmpiezaEscribir}
+    sendEmpezoEscribir(tail,pid,mensaje)
+  end
+
+  def sendEmpezoEscribir([],pid,mensaje) do
+    IO.puts "Se termino de enviar notificacion de empezar a escribir respuesta a " <> mensaje
   end
 
 end
