@@ -1,8 +1,12 @@
 defmodule Alumno do
   IO.puts "Alumno: loaded."
   def start(list) do
+    spawn_link(fn -> init(list) end)
+  end
+
+  def init(list) do
     conectarseALaLista list
-    spawn_link(fn -> loop end)
+    loop
   end
 
   def loop do
