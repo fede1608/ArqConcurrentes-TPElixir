@@ -14,7 +14,7 @@ defmodule Profesor do
       {lista,consulta,:nuevaConsulta} ->
         IO.puts "Hay una nueva consulta" <> consulta
         send lista,{self,consulta,"respuesta",:profesorResponde}
-      {lista, :nuevaRespuesta} -> IO.puts 'Un profesor responde'
+      {lista, mensaje,respuesta,:nuevaRespuesta} -> IO.puts 'Un profesor responde'
       {lista, _ } -> IO.puts 'Mensaje invalido'
     end
     loop
