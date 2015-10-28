@@ -16,10 +16,10 @@ defmodule Lista do
     receive do
       {pid, :alumnoSeConecta} ->
         IO.puts "Un alumno se conecto"
-        Map.put(map,:alumnos,alumnos ++ [pid])
+        map=Map.put(map,:alumnos,alumnos ++ [pid])
       {pid, :profesorSeConecta} ->
         IO.puts "Un profesor se conecto"
-        Map.put(map,:profesores,profesores ++ [pid])
+        map=Map.put(map,:profesores,profesores ++ [pid])
       {pid, mensaje, :nuevoMensaje} ->
         IO.puts "Un alumno mando: " <> mensaje
         sendNuevoMensaje(alumnos,mensaje)
@@ -33,15 +33,17 @@ defmodule Lista do
   end
 
   def sendNuevoMensaje([head|tail],mensaje) do
+    IO.puts "Se envio consulta " <> mensaje <> " a " <> inspect(head)
     send head,{self,mensaje,:nuevaConsulta}
     sendNuevoMensaje(tail,mensaje)
   end
 
   def sendNuevoMensaje([],mensaje) do
-    IO.puts "Se termino de enviar mensaje " <> mensaje
+    IO.puts "Se termino de enviar consulta " <> mensaje
   end
 
   def sendNuevaRespuesta([head|tail],mensaje,respuesta) do
+      IO.puts "Se envio respuesta " <> mensaje <> " a " <> inspect(head)
     send head,{self,mensaje,respuesta,:nuevaRespuesta}
     sendNuevaRespuesta(tail,mensaje,respuesta)
   end
