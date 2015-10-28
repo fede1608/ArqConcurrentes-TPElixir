@@ -6,6 +6,7 @@ defmodule Alumno do
 
   def init(list) do
     conectarseALaLista list
+    spawn_link(fn -> loopPublicar(list, self) end)
     loop
   end
 
@@ -15,6 +16,12 @@ defmodule Alumno do
       {pid, mensaje, :nuevaConsulta} -> IO.puts "Un alumno mando: " <> mensaje
     end
     loop
+  end
+
+  def loopPublicar(list, alumnoReceptor) do
+    send list, {alumnoReceptor, "hello world", :nuevoMensaje}
+    :timer.sleep(2000)
+    loopPublicar(list, alumnoReceptor)
   end
 
   def conectarseALaLista list do
